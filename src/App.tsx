@@ -21,8 +21,8 @@ export const App = () => {
     return value.replace(/[^^\p{Script=Latin}\p{Script=Cyrillic}\d ]+/gu, '');
   };
 
-  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const raw = e.target.value;
+  const onTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = event.target.value;
     const cleaned = sanitizeTitle(raw);
 
     setTitle(cleaned);
@@ -31,15 +31,15 @@ export const App = () => {
     }
   };
 
-  const onUserChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedUserId(e.target.value);
+  const onUserChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedUserId(event.target.value);
     if (showErrors && userError) {
       setUserError('');
     }
   };
 
-  const onAdd = (e: React.FormEvent) => {
-    e.preventDefault();
+  const onAdd = (event: React.FormEvent) => {
+    event.preventDefault();
     setShowErrors(true);
     let valid = true;
 
@@ -57,9 +57,11 @@ export const App = () => {
       return;
     }
 
-    const maxId = todos.length ? Math.max(...todos.map(t => t.id)) : 0;
+    const maxId = todos.length ? Math.max(...todos.map(todo => todo.id)) : 0;
     const newId = maxId + 1;
-    const userObj = users.find(u => String(u.id) === selectedUserId) as User;
+    const userObj = users.find(
+      user => String(user.id) === selectedUserId,
+    ) as User;
 
     const newTodo: Todo = {
       id: newId,
@@ -70,7 +72,7 @@ export const App = () => {
       user: userObj,
     };
 
-    setTodos(prev => [...prev, newTodo]);
+    setTodos(previousTodos => [...previousTodos, newTodo]);
 
     // clear form and errors
     setTitle('');

@@ -10,7 +10,9 @@ export const TodoList = ({ todos, users }: Props) => {
   return (
     <section className="TodoList">
       {todos.map(todo => {
-        const user = todo.user ?? users.find(u => u.id === todo.userId);
+        const user =
+          todo.user ??
+          users.find(candidateUser => candidateUser.id === todo.userId);
 
         return <TodoInfo key={todo.id} todo={todo} user={user} />;
       })}
