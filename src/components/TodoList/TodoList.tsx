@@ -1,21 +1,16 @@
 import { TodoInfo } from '../TodoInfo';
-import { Todo, User } from '../../types';
+import { Todo } from '../../types';
 
 interface Props {
   todos: Todo[];
-  users: User[];
 }
 
-export const TodoList = ({ todos, users }: Props) => {
+export const TodoList = ({ todos }: Props) => {
   return (
     <section className="TodoList">
-      {todos.map(todo => {
-        const user =
-          todo.user ??
-          users.find(candidateUser => candidateUser.id === todo.userId);
-
-        return <TodoInfo key={todo.id} todo={todo} user={user} />;
-      })}
+      {todos.map(todo => (
+        <TodoInfo key={todo.id} todo={todo} user={todo.user} />
+      ))}
     </section>
   );
 };

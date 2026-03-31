@@ -9,6 +9,15 @@ export const App = () => {
   const [todos, setTodos] = useState<Todo[]>(todosFromServer);
   const users = useMemo(() => usersFromServer as User[], []);
 
+  const todosWithUsers = useMemo(
+    () =>
+      todos.map(todo => ({
+        ...todo,
+        user: todo.user ?? users.find(user => user.id === todo.userId),
+      })),
+    [todos, users],
+  );
+
   const [title, setTitle] = useState('');
   const [selectedUserId, setSelectedUserId] = useState<string>('');
 
@@ -123,7 +132,7 @@ export const App = () => {
         </button>
       </form>
 
-      <TodoList todos={todos} users={users} />
+      <TodoList todos={todosWithUsers} />
     </div>
   );
 };

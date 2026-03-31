@@ -1,4 +1,5 @@
 import { Todo, User } from '../../types';
+import { UserInfo } from '../UserInfo';
 
 interface Props {
   todo: Todo;
@@ -15,11 +16,7 @@ export const TodoInfo = ({ todo, user }: Props) => {
     >
       <h2 className="TodoInfo__title">{todo.title}</h2>
 
-      {actualUser && (
-        <a className="UserInfo" href={`mailto:${actualUser.email}`}>
-          {actualUser.name}
-        </a>
-      )}
+      {actualUser && <UserInfo user={actualUser} />}
     </article>
   );
 };
