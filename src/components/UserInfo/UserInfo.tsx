@@ -1,8 +1,7 @@
+import { User } from '../../types';
+
 interface UserInfoProps {
-  user: {
-    name: string;
-    email: string;
-  };
+  user: User;
 }
 export const UserInfo = ({ user }: UserInfoProps) => {
   return (

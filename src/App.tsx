@@ -118,9 +118,9 @@ export const App = () => {
             onChange={onUserChange}
           >
             <option value="">Choose a user</option>
-            {users.map(u => (
-              <option key={u.id} value={String(u.id)}>
-                {u.name}
+            {users.map(user => (
+              <option key={user.id} value={String(user.id)}>
+                {user.name}
               </option>
             ))}
           </select>
